@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OMR Festival 2026 – Stage Program</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --omr-black: #0a0a0a;
+    --omr-white: #ffffff;
+    --omr-red: #e8001e;
+    --omr-gray: #1a1a1a;
+    --omr-gray-2: #2a2a2a;
+    --omr-gray-3: #3a3a3a;
+    --omr-text-muted: #888;
+    --omr-border: rgba(255,255,255,0.08);
+
+    --conference: #e8001e;
+    --red: #ff3b30;
+    --blue: #007aff;
+    --yellow: #ffd60a;
+    --stage5050: #34c759;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--omr-black);
+    color: var(--omr-white);
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--omr-black);
+    border-bottom: 1px solid var(--omr-border);
+    padding: 0 16px;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    gap: 12px;
+  }
+
+  .omr-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .omr-logo-mark {
+    background: var(--omr-red);
+    color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    letter-spacing: -0.5px;
+    padding: 3px 8px 2px;
+    line-height: 1;
+  }
+
+  .omr-logo-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 1px;
+    color: var(--omr-white);
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .omr-logo-sub {
+    font-size: 10px;
+    color: var(--omr-text-muted);
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .clock-badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: var(--omr-text-muted);
+    border: 1px solid var(--omr-border);
+    padding: 4px 10px;
+  }
+
+  .fav-tab-btn {
+    background: none;
+    border: 1px solid var(--omr-border);
+    color: var(--omr-white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: border-color 0.2s, background 0.2s;
+    white-space: nowrap;
+  }
+
+  .fav-tab-btn:hover, .fav-tab-btn.active {
+    background: var(--omr-red);
+    border-color: var(--omr-red);
+  }
+
+  .fav-badge {
+    background: var(--omr-white);
+    color: var(--omr-black);
+    font-size: 10px;
+    font-weight: 800;
+    padding: 1px 5px;
+    border-radius: 10px;
+    min-width: 16px;
+    text-align: center;
+  }
+
+  .fav-tab-btn.active .fav-badge {
+    background: var(--omr-black);
+    color: var(--omr-white);
+  }
+
+  /* ─── DAY TABS ─── */
+  .day-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--omr-border);
+  }
+
+  .day-tab {
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -1px;
+    color: var(--omr-text-muted);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+
+  .day-tab.active {
+    color: var(--omr-white);
+    border-bottom-color: var(--omr-red);
+  }
+
+  .day-tab:hover:not(.active) {
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* ─── STAGE FILTER ─── */
+  .stage-filter {
+    display: flex;
+    gap: 6px;
+    padding: 10px 16px;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--omr-border);
+    scrollbar-width: none;
+  }
+
+  .stage-filter::-webkit-scrollbar { display: none; }
+
+  .stage-pill {
+    background: none;
+    border: 1px solid var(--omr-border);
+    color: var(--omr-text-muted);
+    font-family: 'Barlow', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .stage-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .stage-pill.active {
+    color: var(--omr-white);
+    border-color: rgba(255,255,255,0.3);
+    background: var(--omr-gray-2);
+  }
+
+  .stage-pill[data-stage="all"].active { border-color: var(--omr-red); }
+  .stage-pill[data-stage="conference"].active { border-color: var(--conference); }
+  .stage-pill[data-stage="red"].active { border-color: var(--red); }
+  .stage-pill[data-stage="blue"].active { border-color: var(--blue); }
+  .stage-pill[data-stage="yellow"].active { border-color: var(--yellow); }
+  .stage-pill[data-stage="5050"].active { border-color: var(--stage5050); }
+
+  /* ─── LIVE BANNER ─── */
+  .live-banner {
+    background: var(--omr-red);
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    display: none;
+  }
+
+  .live-banner.visible { display: flex; }
+
+  .live-dot {
+    width: 8px; height: 8px;
+    background: white;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  /* ─── MAIN CONTENT ─── */
+  .main {
+    padding: 12px 16px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* ─── SESSION CARD ─── */
+  .session-card {
+    border: 1px solid var(--omr-border);
+    margin-bottom: 8px;
+    background: var(--omr-gray);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .session-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+  }
+
+  .session-card[data-stage="conference"]::before { background: var(--conference); }
+  .session-card[data-stage="red"]::before { background: var(--red); }
+  .session-card[data-stage="blue"]::before { background: var(--blue); }
+  .session-card[data-stage="yellow"]::before { background: var(--yellow); }
+  .session-card[data-stage="5050"]::before { background: var(--stage5050); }
+
+  .session-card:hover {
+    border-color: rgba(255,255,255,0.2);
+    background: var(--omr-gray-2);
+  }
+
+  .session-card.is-live {
+    border-color: var(--omr-red) !important;
+    background: rgba(232, 0, 30, 0.06);
+  }
+
+  .session-card.is-past {
+    opacity: 0.4;
+  }
+
+  .card-main {
+    padding: 12px 14px 12px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .card-left {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+  }
+
+  .card-time {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--omr-text-muted);
+    white-space: nowrap;
+  }
+
+  .card-stage {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    color: var(--omr-black);
+    white-space: nowrap;
+  }
+
+  [data-stage="conference"] .card-stage { background: var(--conference); }
+  [data-stage="red"] .card-stage { background: var(--red); }
+  [data-stage="blue"] .card-stage { background: var(--blue); }
+  [data-stage="yellow"] .card-stage { background: var(--yellow); color: #000; }
+  [data-stage="5050"] .card-stage { background: var(--stage5050); }
+
+  .live-tag {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--omr-red);
+    border: 1px solid var(--omr-red);
+    padding: 2px 6px;
+    display: none;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .is-live .live-tag { display: flex; }
+
+  .conflict-tag {
+    font-size: 9px;
+    font-weight: 800;
+    color: var(--yellow);
+    border: 1px solid var(--yellow);
+    padding: 2px 6px;
+    display: none;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .conflict-tag.visible { display: flex; }
+
+  .card-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 1.2;
+    color: var(--omr-white);
+    margin-bottom: 4px;
+  }
+
+  .card-speaker {
+    font-size: 13px;
+    color: var(--omr-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .fav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    padding: 2px;
+    transition: transform 0.15s;
+    color: var(--omr-text-muted);
+  }
+
+  .fav-btn:hover { transform: scale(1.2); color: var(--omr-white); }
+  .fav-btn.active { color: var(--omr-red); }
+
+  .expand-icon {
+    font-size: 11px;
+    color: var(--omr-text-muted);
+    transition: transform 0.2s;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  /* ─── EXPANDABLE DETAILS ─── */
+  .card-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    border-top: 0px solid var(--omr-border);
+  }
+
+  .session-card.expanded .card-details {
+    max-height: 200px;
+    border-top: 1px solid var(--omr-border);
+  }
+
+  .session-card.expanded .expand-icon {
+    transform: rotate(180deg);
+  }
+
+  .details-inner {
+    padding: 12px 18px;
+  }
+
+  .details-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+
+  .details-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border: 1px solid var(--omr-border);
+    color: var(--omr-text-muted);
+    padding: 2px 8px;
+  }
+
+  /* ─── EMPTY STATE ─── */
+  .empty-state {
+    text-align: center;
+    padding: 48px 24px;
+    color: var(--omr-text-muted);
+  }
+
+  .empty-state .icon {
+    font-size: 36px;
+    margin-bottom: 12px;
+  }
+
+  .empty-state p {
+    font-size: 14px;
+  }
+
+  /* ─── DAY SECTION HEADER ─── */
+  .day-section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding-top: 4px;
+  }
+
+  .day-section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 28px;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    color: var(--omr-white);
+  }
+
+  .day-section-date {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--omr-text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ─── FAVORITES VIEW ─── */
+  #favView { display: none; }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--omr-gray-3); }
+
+  @media (min-width: 600px) {
+    .card-title { font-size: 19px; }
+    .header-top { padding: 14px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div class="omr-logo">
+      <div>
+        <div class="omr-logo-mark">OMR</div>
+      </div>
+      <div>
+        <div class="omr-logo-text">Festival 2026</div>
+        <div class="omr-logo-sub">05. & 06. Mai · Hamburg Messe</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="clock-badge" id="clock">--:--</div>
+      <button class="fav-tab-btn" id="favToggleBtn" onclick="toggleFavView()">
+        ♥ <span id="favBadge" class="fav-badge">0</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="day-tabs" id="dayTabs">
+    <button class="day-tab active" data-day="day1" onclick="switchDay('day1')">Di, 05. Mai</button>
+    <button class="day-tab" data-day="day2" onclick="switchDay('day2')">Mi, 06. Mai</button>
+  </div>
+
+  <div class="stage-filter" id="stageFilter">
+    <button class="stage-pill active" data-stage="all" onclick="filterStage('all')">
+      <span class="stage-dot" style="background:var(--omr-red)"></span>Alle Stages
+    </button>
+    <button class="stage-pill" data-stage="conference" onclick="filterStage('conference')">
+      <span class="stage-dot" style="background:var(--conference)"></span>Conference
+    </button>
+    <button class="stage-pill" data-stage="red" onclick="filterStage('red')">
+      <span class="stage-dot" style="background:var(--red)"></span>Red Stage
+    </button>
+    <button class="stage-pill" data-stage="blue" onclick="filterStage('blue')">
+      <span class="stage-dot" style="background:var(--blue)"></span>Blue Stage
+    </button>
+    <button class="stage-pill" data-stage="yellow" onclick="filterStage('yellow')">
+      <span class="stage-dot" style="background:var(--yellow)"></span>Yellow Stage
+    </button>
+    <button class="stage-pill" data-stage="5050" onclick="filterStage('5050')">
+      <span class="stage-dot" style="background:var(--stage5050)"></span>5050 Stage
+    </button>
+  </div>
+
+  <div class="live-banner" id="liveBanner">
+    <span class="live-dot"></span>
+    <span id="liveBannerText">Gerade live: ...</span>
+  </div>
+</header>
+
+<div class="main">
+  <!-- PROGRAM VIEW -->
+  <div id="programView">
+    <div id="sessionList"></div>
+  </div>
+
+  <!-- FAVORITES VIEW -->
+  <div id="favView">
+    <div class="day-section-header" style="margin-top:8px">
+      <div class="day-section-title">Mein Programm</div>
+    </div>
+    <div id="favList"></div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const PROGRAM = {
+  day1: {
+    label: 'Di, 05. Mai',
+    date: '2026-05-05',
+    sessions: [
+      { id: 'd1_001', time: '09:00', end: '09:45', stage: 'conference', title: 'Opening Keynote: The Future of Digital Marketing', speaker: 'Philipp Westermeyer (OMR)', tags: ['Keynote', 'Marketing'] },
+      { id: 'd1_002', time: '09:00', end: '09:45', stage: 'red', title: 'AI in Brand Communication: From Strategy to Execution', speaker: 'Tom Brady', tags: ['AI', 'Branding'] },
+      { id: 'd1_003', time: '09:00', end: '09:45', stage: 'blue', title: 'Performance Marketing 2026: What Works Now', speaker: 'Scott Galloway (NYU)', tags: ['Performance', 'Growth'] },
+      { id: 'd1_004', time: '09:30', end: '10:15', stage: 'yellow', title: 'E-Commerce Mega Trends: Beyond D2C', speaker: 'Klarna Team', tags: ['E-Commerce', 'Trends'] },
+      { id: 'd1_005', time: '09:30', end: '10:15', stage: '5050', title: 'Gründerinnen im Fokus: Wege aus der Finanzierungslücke', speaker: 'Moderation: 5050 Stage', tags: ['Diversity', 'Funding'] },
+      { id: 'd1_006', time: '10:00', end: '10:45', stage: 'conference', title: 'Heidi Klum: Personal Brand als Business Ecosystem', speaker: 'Heidi Klum', tags: ['Brand', 'Keynote'] },
+      { id: 'd1_007', time: '10:00', end: '10:45', stage: 'red', title: 'ChatGPT & Marketing Automation: Real Cases', speaker: 'Nicholas Turley (OpenAI)', tags: ['AI', 'Automation'] },
+      { id: 'd1_008', time: '10:30', end: '11:15', stage: 'blue', title: 'Social Media ROI: Influencer Marketing ohne Mythen', speaker: 'Pinterest CPO', tags: ['Social', 'Influencer'] },
+      { id: 'd1_009', time: '10:30', end: '11:15', stage: 'yellow', title: 'WHOOP: Wie man eine Health-Brand global skaliert', speaker: 'Will Ahmed (WHOOP)', tags: ['D2C', 'Health'] },
+      { id: 'd1_010', time: '11:00', end: '11:45', stage: 'conference', title: 'Meredith Whittaker: Signal, Datenschutz & die Demokratie', speaker: 'Meredith Whittaker (Signal)', tags: ['Privacy', 'Tech'] },
+      { id: 'd1_011', time: '11:00', end: '11:45', stage: 'red', title: 'AG1: Community Marketing auf Weltklasse-Niveau', speaker: 'AG1 Marketing Team', tags: ['Community', 'D2C'] },
+      { id: 'd1_012', time: '11:00', end: '11:45', stage: '5050', title: 'Female Founders Pitch: Die besten Startups 2026', speaker: 'Panel', tags: ['Startup', 'Pitch'] },
+      { id: 'd1_013', time: '11:30', end: '12:15', stage: 'blue', title: 'Pinterest: Visual Search & Shopping Revolution', speaker: 'Pinterest Team', tags: ['Social', 'E-Commerce'] },
+      { id: 'd1_014', time: '11:30', end: '12:15', stage: 'yellow', title: 'Commerzbank Digital: Banking als Plattform', speaker: 'Bettina Orlopp (Commerzbank)', tags: ['Finance', 'Platform'] },
+      { id: 'd1_015', time: '13:00', end: '13:45', stage: 'conference', title: 'Roland Emmerich: Storytelling & Spectacle im digitalen Zeitalter', speaker: 'Roland Emmerich', tags: ['Storytelling', 'Keynote'] },
+      { id: 'd1_016', time: '13:00', end: '13:45', stage: 'red', title: 'Klarna: Buy Now, Pay Later im globalen Kontext', speaker: 'Klarna Leadership', tags: ['Fintech', 'Growth'] },
+      { id: 'd1_017', time: '13:00', end: '13:45', stage: 'blue', title: 'TikTok Ads: Creator Economy & Brand Safety', speaker: 'TikTok Team', tags: ['TikTok', 'Creator'] },
+      { id: 'd1_018', time: '13:30', end: '14:15', stage: 'yellow', title: 'Amazon Ads: Full-Funnel Strategies für 2026', speaker: 'Amazon Ads Team', tags: ['Amazon', 'Performance'] },
+      { id: 'd1_019', time: '13:30', end: '14:15', stage: '5050', title: 'Gerechte Bezahlung in der Kreativwirtschaft', speaker: 'Panel', tags: ['Diversity', 'Pay'] },
+      { id: 'd1_020', time: '14:00', end: '14:45', stage: 'conference', title: 'Vizekanzler im Gespräch: Digitalpolitik Deutschland 2030', speaker: 'Digitalminister & Moderator', tags: ['Politik', 'Digital'] },
+      { id: 'd1_021', time: '14:00', end: '14:45', stage: 'red', title: 'Meta Ads in der Post-Cookie-Ära', speaker: 'Meta Team', tags: ['Meta', 'Privacy'] },
+      { id: 'd1_022', time: '14:30', end: '15:15', stage: 'blue', title: 'Google Search 2026: AI Overviews & SEO', speaker: 'Google Team', tags: ['Google', 'SEO'] },
+      { id: 'd1_023', time: '14:30', end: '15:15', stage: 'yellow', title: 'Zalando: Fashion & Tech – Das neue Wachstum', speaker: 'Zalando CMO', tags: ['Fashion', 'E-Commerce'] },
+      { id: 'd1_024', time: '15:00', end: '15:45', stage: 'conference', title: 'ZAH1DE & Serdar Boğatekin: TikTok zum Musikerfolg', speaker: 'ZAH1DE + Lunatix Team', tags: ['Music', 'TikTok'] },
+      { id: 'd1_025', time: '15:00', end: '15:45', stage: '5050', title: 'Intersektionalität in Tech & Marketing', speaker: 'Panel', tags: ['Diversity'] },
+      { id: 'd1_026', time: '15:30', end: '16:15', stage: 'red', title: 'Vodafone: Telco als digitaler Enabler', speaker: 'Vodafone Marketing', tags: ['Telco', 'B2B'] },
+      { id: 'd1_027', time: '15:30', end: '16:15', stage: 'blue', title: 'Content AI vs. General AI: Zwei Welten', speaker: 'Panel', tags: ['AI', 'Content'] },
+      { id: 'd1_028', time: '16:00', end: '17:00', stage: 'conference', title: 'Closing Keynote Tag 1: Mark Forster Live-Talk', speaker: 'Mark Forster', tags: ['Music', 'Pop Culture'] },
+    ]
+  },
+  day2: {
+    label: 'Mi, 06. Mai',
+    date: '2026-05-06',
+    sessions: [
+      { id: 'd2_001', time: '09:00', end: '09:45', stage: 'conference', title: 'Good Morning OMR: Der Stand der Digitalwirtschaft 2026', speaker: 'Philipp Westermeyer (OMR)', tags: ['Keynote', 'Trends'] },
+      { id: 'd2_002', time: '09:00', end: '09:45', stage: 'red', title: 'Generative AI in Advertising: Hype vs. Reality', speaker: 'Amy Webb (Future Today)', tags: ['AI', 'Advertising'] },
+      { id: 'd2_003', time: '09:00', end: '09:45', stage: 'blue', title: 'B2B Marketing 2026: LinkedIn, Dark Social & mehr', speaker: 'LinkedIn Team', tags: ['B2B', 'LinkedIn'] },
+      { id: 'd2_004', time: '09:30', end: '10:15', stage: 'yellow', title: 'SAP: Enterprise Software trifft KI', speaker: 'SAP Team', tags: ['Enterprise', 'AI'] },
+      { id: 'd2_005', time: '09:30', end: '10:15', stage: '5050', title: 'Frauen in Führung: Zahlen, Strategien, Lösungen', speaker: 'Panel', tags: ['Leadership', 'Diversity'] },
+      { id: 'd2_006', time: '10:00', end: '10:45', stage: 'conference', title: 'Reddit & Community Marketing: Die Jen Wong Story', speaker: 'Jen Wong (Reddit)', tags: ['Community', 'Platform'] },
+      { id: 'd2_007', time: '10:00', end: '10:45', stage: 'red', title: 'Dell Technologies: B2B im KI-Zeitalter', speaker: 'Dell Tech Team', tags: ['B2B', 'AI'] },
+      { id: 'd2_008', time: '10:30', end: '11:15', stage: 'blue', title: 'Podcast Marketing 2026: Reichweite & Monetarisierung', speaker: 'OMR Podcast Team', tags: ['Podcast', 'Audio'] },
+      { id: 'd2_009', time: '10:30', end: '11:15', stage: 'yellow', title: 'Cross-Border E-Commerce: Europäische Expansion', speaker: 'Panel', tags: ['E-Commerce', 'International'] },
+      { id: 'd2_010', time: '11:00', end: '11:45', stage: 'conference', title: 'Amy Webb: The Next Tech Wave – Was nach AI kommt', speaker: 'Amy Webb (Future Today Institute)', tags: ['Keynote', 'Future'] },
+      { id: 'd2_011', time: '11:00', end: '11:45', stage: 'red', title: 'Food Entrepreneurship: Die Disruption beginnt auf dem Teller', speaker: 'Panel mit Gründerinnen', tags: ['Food', 'Startup'] },
+      { id: 'd2_012', time: '11:00', end: '11:45', stage: '5050', title: 'Lohngleichheit: Was Unternehmen jetzt tun können', speaker: 'Panel', tags: ['Pay Equity', 'HR'] },
+      { id: 'd2_013', time: '11:30', end: '12:15', stage: 'blue', title: 'YouTube vs. TikTok vs. Instagram: Der Plattformkrieg 2026', speaker: 'Creator Economy Panel', tags: ['Creator', 'Platform'] },
+      { id: 'd2_014', time: '11:30', end: '12:15', stage: 'yellow', title: 'Retargeting in der cookielosen Welt', speaker: 'Panel', tags: ['Performance', 'Privacy'] },
+      { id: 'd2_015', time: '13:00', end: '13:45', stage: 'conference', title: 'Startup Pitch: Die heißesten deutschen Startups 2026', speaker: 'OMR + Investoren-Panel', tags: ['Startup', 'Pitch'] },
+      { id: 'd2_016', time: '13:00', end: '13:45', stage: 'red', title: 'Influencer-Verträge, IP und Recht 2026', speaker: 'Rechtsexpert:innen Panel', tags: ['Legal', 'Creator'] },
+      { id: 'd2_017', time: '13:00', end: '13:45', stage: 'blue', title: 'Google Performance Max: Alles, was du wissen musst', speaker: 'Google Team', tags: ['Google', 'Performance'] },
+      { id: 'd2_018', time: '13:30', end: '14:15', stage: 'yellow', title: 'Shopify vs. Custom: Die richtige Plattformwahl', speaker: 'Panel', tags: ['E-Commerce', 'Tech'] },
+      { id: 'd2_019', time: '13:30', end: '14:15', stage: '5050', title: 'Mentoring & Netzwerke: Wie Frauen aufsteigen', speaker: 'Panel', tags: ['Mentoring', 'Diversity'] },
+      { id: 'd2_020', time: '14:00', end: '14:45', stage: 'conference', title: 'KI & Demokratie: Chancen und Risiken für die Gesellschaft', speaker: 'Panel', tags: ['AI', 'Gesellschaft'] },
+      { id: 'd2_021', time: '14:00', end: '14:45', stage: 'red', title: 'Creator Economy: Von 0 auf 1M Follower', speaker: 'Top Creator Panel', tags: ['Creator', 'Growth'] },
+      { id: 'd2_022', time: '14:30', end: '15:15', stage: 'blue', title: 'Email Marketing 2026: Noch relevant? So geht es', speaker: 'Panel', tags: ['Email', 'CRM'] },
+      { id: 'd2_023', time: '14:30', end: '15:15', stage: 'yellow', title: 'Fashion Resale & Nachhaltigkeit im E-Commerce', speaker: 'Panel', tags: ['Fashion', 'Sustainability'] },
+      { id: 'd2_024', time: '15:00', end: '15:45', stage: 'conference', title: 'OMR Talk: Die wichtigsten Learnings aus 2 Tagen', speaker: 'Philipp Westermeyer (OMR)', tags: ['Recap', 'Trends'] },
+      { id: 'd2_025', time: '15:00', end: '15:45', stage: '5050', title: 'Schlusspanel: Gleichstellung in der Digitalwirtschaft', speaker: 'Panel', tags: ['Diversity'] },
+      { id: 'd2_026', time: '15:30', end: '16:15', stage: 'red', title: 'Affiliate Marketing: Schlafender Riese erwacht', speaker: 'Panel', tags: ['Affiliate', 'Performance'] },
+      { id: 'd2_027', time: '15:30', end: '16:15', stage: 'blue', title: 'Employer Branding: Talente gewinnen in 2026', speaker: 'HR & Marketing Panel', tags: ['HR', 'Branding'] },
+      { id: 'd2_028', time: '16:00', end: '17:00', stage: 'conference', title: 'Closing Keynote OMR26: See You Next Year!', speaker: 'Philipp Westermeyer (OMR)', tags: ['Keynote', 'Closing'] },
+    ]
+  }
+};
+
+// ============================================================
+// STATE
+// ============================================================
+let currentDay = 'day1';
+let currentStage = 'all';
+let favorites = JSON.parse(localStorage.getItem('omr26-favs') || '[]');
+let showFavView = false;
+
+// ============================================================
+// TIME UTILS
+// ============================================================
+function getNow() {
+  // For demo: return new Date(); — for testing specific time, uncomment below:
+  // return new Date('2026-05-05T10:20:00');
+  return new Date();
+}
+
+function toMinutes(timeStr) {
+  const [h, m] = timeStr.split(':').map(Number);
+  return h * 60 + m;
+}
+
+function isLive(session, dayData) {
+  const now = getNow();
+  const todayStr = now.toISOString().slice(0, 10);
+  if (dayData.date !== todayStr) return false;
+  const nowMins = now.getHours() * 60 + now.getMinutes();
+  return nowMins >= toMinutes(session.time) && nowMins < toMinutes(session.end);
+}
+
+function isPast(session, dayData) {
+  const now = getNow();
+  const todayStr = now.toISOString().slice(0, 10);
+  if (dayData.date !== todayStr) return false;
+  if (now.toISOString().slice(0, 10) < dayData.date) return false;
+  const nowMins = now.getHours() * 60 + now.getMinutes();
+  return nowMins >= toMinutes(session.end);
+}
+
+function hasConflict(sessionId) {
+  if (!favorites.includes(sessionId)) return false;
+  const allSessions = Object.values(PROGRAM).flatMap(d => d.sessions.map(s => ({ ...s, dayDate: d.date })));
+  const thisSess = allSessions.find(s => s.id === sessionId);
+  if (!thisSess) return false;
+  return favorites.some(fId => {
+    if (fId === sessionId) return false;
+    const other = allSessions.find(s => s.id === fId);
+    if (!other || other.dayDate !== thisSess.dayDate) return false;
+    return toMinutes(thisSess.time) < toMinutes(other.end) && toMinutes(thisSess.end) > toMinutes(other.time);
+  });
+}
+
+// ============================================================
+// RENDER
+// ============================================================
+function renderAll() {
+  renderSessionList();
+  renderFavList();
+  updateFavBadge();
+  updateLiveBanner();
+  updateClock();
+}
+
+function renderSessionList() {
+  const container = document.getElementById('sessionList');
+  const dayData = PROGRAM[currentDay];
+  let sessions = dayData.sessions;
+
+  if (currentStage !== 'all') {
+    sessions = sessions.filter(s => s.stage === currentStage);
+  }
+
+  if (sessions.length === 0) {
+    container.innerHTML = `<div class="empty-state"><div class="icon">🎭</div><p>Keine Sessions für diese Stage.</p></div>`;
+    return;
+  }
+
+  // Group by time slot
+  container.innerHTML = sessions.map(s => renderCard(s, dayData)).join('');
+}
+
+function renderFavList() {
+  const container = document.getElementById('favList');
+  if (favorites.length === 0) {
+    container.innerHTML = `<div class="empty-state"><div class="icon">♥</div><p>Noch keine Favoriten gespeichert.<br>Tippe auf ♥ bei einem Programmpunkt.</p></div>`;
+    return;
+  }
+  const allSessions = Object.entries(PROGRAM).flatMap(([dayKey, dayData]) =>
+    dayData.sessions.filter(s => favorites.includes(s.id)).map(s => ({ ...s, dayData, dayKey }))
+  );
+  container.innerHTML = allSessions.map(({ dayKey, dayData, ...s }) => renderCard(s, dayData, true)).join('');
+}
+
+function renderCard(s, dayData, showDay = false) {
+  const live = isLive(s, dayData);
+  const past = isPast(s, dayData);
+  const faved = favorites.includes(s.id);
+  const conflict = hasConflict(s.id);
+
+  const classes = ['session-card',
+    live ? 'is-live' : '',
+    past ? 'is-past' : '',
+    document.querySelector(`#card-${s.id}`)?.classList.contains('expanded') ? 'expanded' : ''
+  ].filter(Boolean).join(' ');
+
+  const dayLabel = showDay ? `<span class="tag">${dayData.label}</span>` : '';
+
+  return `
+    <div class="session-card ${classes}" data-stage="${s.stage}" id="card-${s.id}" onclick="toggleCard('${s.id}')">
+      <div class="card-main">
+        <div class="card-left">
+          <div class="card-meta">
+            <span class="card-time">${s.time}–${s.end}</span>
+            <span class="card-stage">${stageLabel(s.stage)}</span>
+            <span class="live-tag"><span class="live-dot" style="width:6px;height:6px;margin-right:2px;"></span>LIVE</span>
+            <span class="conflict-tag ${conflict ? 'visible' : ''}">⚡ Konflikt</span>
+            ${dayLabel}
+          </div>
+          <div class="card-title">${s.title}</div>
+          <div class="card-speaker">${s.speaker}</div>
+        </div>
+        <div class="card-right">
+          <button class="fav-btn ${faved ? 'active' : ''}" onclick="toggleFav(event,'${s.id}')" title="Favorit">${faved ? '♥' : '♡'}</button>
+          <span class="expand-icon">▾</span>
+        </div>
+      </div>
+      <div class="card-details">
+        <div class="details-inner">
+          <div class="details-tags">
+            ${s.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function stageLabel(stage) {
+  const map = { conference: 'Conference Stage', red: 'Red Stage', blue: 'Blue Stage', yellow: 'Yellow Stage', '5050': '5050 Stage' };
+  return map[stage] || stage;
+}
+
+// ============================================================
+// INTERACTIONS
+// ============================================================
+function switchDay(day) {
+  currentDay = day;
+  document.querySelectorAll('.day-tab').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.day === day);
+  });
+  renderAll();
+}
+
+function filterStage(stage) {
+  currentStage = stage;
+  document.querySelectorAll('.stage-pill').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.stage === stage);
+  });
+  renderSessionList();
+}
+
+function toggleCard(id) {
+  const card = document.getElementById(`card-${id}`);
+  if (card) card.classList.toggle('expanded');
+}
+
+function toggleFav(e, id) {
+  e.stopPropagation();
+  if (favorites.includes(id)) {
+    favorites = favorites.filter(f => f !== id);
+  } else {
+    favorites.push(id);
+  }
+  localStorage.setItem('omr26-favs', JSON.stringify(favorites));
+  renderAll();
+}
+
+function toggleFavView() {
+  showFavView = !showFavView;
+  document.getElementById('programView').style.display = showFavView ? 'none' : 'block';
+  document.getElementById('favView').style.display = showFavView ? 'block' : 'none';
+  document.querySelector('.stage-filter').style.display = showFavView ? 'none' : 'flex';
+  document.getElementById('favToggleBtn').classList.toggle('active', showFavView);
+  if (showFavView) renderFavList();
+}
+
+function updateFavBadge() {
+  document.getElementById('favBadge').textContent = favorites.length;
+}
+
+function updateLiveBanner() {
+  const banner = document.getElementById('liveBanner');
+  const allDays = Object.values(PROGRAM);
+  const liveSessions = allDays.flatMap(d => d.sessions.filter(s => isLive(s, d)));
+  if (liveSessions.length > 0) {
+    banner.classList.add('visible');
+    document.getElementById('liveBannerText').textContent = `Jetzt live: ${liveSessions.slice(0,2).map(s => `${stageLabel(s.stage)}: ${s.title}`).join(' · ')}`;
+  } else {
+    banner.classList.remove('visible');
+  }
+}
+
+function updateClock() {
+  const now = getNow();
+  const h = String(now.getHours()).padStart(2, '0');
+  const m = String(now.getMinutes()).padStart(2, '0');
+  document.getElementById('clock').textContent = `${h}:${m}`;
+}
+
+// ============================================================
+// INIT
+// ============================================================
+renderAll();
+setInterval(() => {
+  updateClock();
+  updateLiveBanner();
+  renderAll();
+}, 30000);
+
+// Auto-switch to today
+const now = getNow();
+const todayStr = now.toISOString().slice(0, 10);
+const autoDay = Object.keys(PROGRAM).find(k => PROGRAM[k].date === todayStr);
+if (autoDay) switchDay(autoDay);
+</script>
+</body>
+</html>
